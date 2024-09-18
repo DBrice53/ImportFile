@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Import extends Model
 {
     use HasFactory;
-    protected $table = 'imports';
+
     protected $fillable = [
 
         'name',
@@ -16,7 +16,6 @@ class Import extends Model
         'date',
         'shift',
         'timetable',
-
         'attendance_status',
         'check_in',
         'check_out',
