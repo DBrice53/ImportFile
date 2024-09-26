@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\ImportFiles;
+use App\Models\Import;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
@@ -10,7 +11,9 @@ use Illuminate\Support\Facades\Redirect;
 class ImportController extends Controller
 {
     public function index(){
-        return view('Import'); // Assurez-vous que cette vue est correctement configurée
+
+        $importedData = Import::all();
+        return view('Import', ['imports' => $importedData]); // Assurez-vous que cette vue est correctement configurée
     }
 
     public function import(Request $request){
@@ -23,7 +26,7 @@ class ImportController extends Controller
             // Importation du fichier
             Excel::import(new ImportFiles, $request->file('file'));
 
-          
+
 
             // Redirection avec message de succès
             return Redirect::back()->with('success', 'Fichier importé avec succès.');
